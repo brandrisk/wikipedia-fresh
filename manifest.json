@@ -1,12 +1,18 @@
 {
     "manifest_version": 2,
-    "name": "Wikipedia Fresh",
+    "name": "Wikipedia Kit",
     "description": "",
     "version": "0.0",
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
-            "css": ["wikipedia.css"]
+            "matches": ["https://*.wikipedia.org/wiki/*"],
+            "css": ["wikipedia.css"],
+            "js": ["wikipedia.js"]
         }
+    ],
+    "permissions": ["storage"],
+    "web_accessible_resources": [
+        "settings.html",
+        "settings.js"
     ]
 }
