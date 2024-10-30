@@ -1,19 +1,14 @@
-thead {
-    position: sticky;
-    top: 0;
-}
+/* body, .mw-body h1, .mw-body .mw-heading1, .mw-body-content h1, .mw-body-content .mw-heading1, .mw-body-content h2, .mw-body-content .mw-heading2 {
 
-body, .mw-body h1, .mw-body .mw-heading1, .mw-body-content h1, .mw-body-content .mw-heading1, .mw-body-content h2, .mw-body-content .mw-heading2 {
-
-}
+} */
 
 #x-wk-stt-button {
     position: fixed;
     bottom: 10px;
     right: 10px;
     z-index: 10;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: white;
     border-radius: 100%;
     opacity: 0.5;
@@ -26,4 +21,13 @@ body, .mw-body h1, .mw-body .mw-heading1, .mw-body-content h1, .mw-body-content 
 
 #x-wk-stt-button:hover {
     opacity: 1;
+}
+
+.x-wk-button {
+    display: flex;
+    border-radius: 5px;
+    background: lightgrey;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
