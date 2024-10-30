@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wikipedia Kit settings</title>
+        <link rel="stylesheet" href="settings.css">
+    </head>
+    <body>
+        <div class="page">
+            <form id="settings">
+                <div class="setting">
+                    <label for="font">Google font (for example <a class="link" href="https://fonts.google.com/specimen/Ubuntu">https://fonts.google.com/specimen/Ubuntu</a>)</label>
+                    <input id="font" type="url" placeholder="font">
+                </div>
+
+                <div class="setting toggle-container" id="clean-copy-toggle" x-wk-on="true">
+                    <label>Clean Copy (don't select <sup>[references]</sup>)</label>
+                    <div class="toggle">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+                
+                <div class="setting toggle-container" id="scroll-button-toggle" x-wk-on="false">
+                    <label>Scroll To Top button</label>
+                    <div class="toggle">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+
+                <button class="button" type="submit">Save</button>
+                <div id="save-info">Saved</div>
+                
+            </form>
+        </div>
+        <script src="settings.js"></script>
+    </body>
+</html>
