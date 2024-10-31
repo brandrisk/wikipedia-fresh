@@ -242,6 +242,7 @@ function stickyTables() {
         thead {
             position: sticky;
             top: 0;
+            box-shadow: 0 0 1px grey;
         }
 
         `);
@@ -249,6 +250,10 @@ function stickyTables() {
     const tables = document.querySelectorAll('.wikitable');
 
     for (let table of tables) {
+        if (window.innerHeight > table.getBoundingClientRect().height) {
+            continue;
+        }
+
         if (!table.querySelector('thead')) {
             const tbody = table.querySelector('tbody');
             const firstRow = tbody.querySelector('tr');
