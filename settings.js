@@ -3,8 +3,10 @@ const fontInput = document.querySelector('#font');
 const scrollButtonToggle = document.querySelector('#scroll-button-toggle');
 const cleanCopyToggle = document.querySelector('#clean-copy-toggle');
 const saveInfo = document.querySelector('#save-info');
+const justReadToggle = document.querySelector('#just-read-toggle');
+const stickyTablesToggle = document.querySelector('#sticky-tables-toggle');
 
-browser.storage.local.get(['cleanCopy', 'scrollButton', 'font']).then((res) => {
+browser.storage.local.get(['cleanCopy', 'scrollButton', 'font', 'justRead', 'stickyTables']).then((res) => {
     console.log(res)
     if (res.cleanCopy != undefined) {
         cleanCopyToggle.setAttribute('x-wk-on', res.cleanCopy);
@@ -14,9 +16,18 @@ browser.storage.local.get(['cleanCopy', 'scrollButton', 'font']).then((res) => {
         scrollButtonToggle.setAttribute('x-wk-on', res.scrollButton);
     }
 
-    if (res.font != undefined) {
-        font.value = res.font;
+    if (res.justRead != undefined) {
+        justReadToggle.setAttribute('x-wk-on', res.justRead);
     }
+
+    if (res.stickyTables != undefined) {
+        stickyTablesToggle.setAttribute('x-wk-on', res.stickyTables);
+    }
+
+    if (res.font != undefined) {
+        fontInput.value = res.font;
+    }
+
 });
 
 scrollButtonToggle.addEventListener('click', () => {
@@ -29,18 +40,29 @@ cleanCopyToggle.addEventListener('click', () => {
     cleanCopyToggle.setAttribute('x-wk-on', !value);
 });
 
+justReadToggle.addEventListener('click', () => {
+    const value = getToggleValue('just-read-toggle');
+    justReadToggle.setAttribute('x-wk-on', !value);
+});
+
+stickyTablesToggle.addEventListener('click', () => {
+    const value = getToggleValue('sticky-tables-toggle');
+    stickyTablesToggle.setAttribute('x-wk-on', !value);
+});
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const scrollButtonValue = getToggleValue('scroll-button-toggle');
-    const cleanCopyValue = getToggleValue('clean-copy-toggle');
 
     const data = {
-        scrollButton: scrollButtonValue,
-        cleanCopy: cleanCopyValue,
-        font: fontInput.value,
+        scrollButton: getToggleValue('scroll-button-toggle'),
+        cleanCopy: getToggleValue('clean-copy-toggle'),
+        justRead: getToggleValue('just-read-toggle'),
+        stickyTables: getToggleValue('sticky-tables-toggle'),
+        font: fontInput?.value,
     }
 
-    console.log(data);
+    saveInfo.style.display = 'none';
+
     browser.storage.local.set(data).then((res) => {
         saveInfo.style.display = 'block';
     });

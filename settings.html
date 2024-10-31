@@ -3,17 +3,38 @@
     <head>
         <title>Wikipedia Kit settings</title>
         <link rel="stylesheet" href="settings.css">
+        <link rel="icon" href="icons/wikipedia-128.png">
     </head>
     <body>
         <div class="page">
+            <a href="https://www.wikipedia.org/">
+                <img src="icons/wikipedia-128.png" width="50">
+            </a>
             <form id="settings">
-                <div class="setting">
+                <!-- <div class="setting">
                     <label for="font">Google font (for example <a class="link" href="https://fonts.google.com/specimen/Ubuntu">https://fonts.google.com/specimen/Ubuntu</a>)</label>
                     <input id="font" type="url" placeholder="font">
+                </div> -->
+
+                <div class="setting toggle-container" id="just-read-toggle" x-wk-on="true">
+                    <label>Simple UI</label>
+                    <div class="setting-info">Remove clutter and change design</div>
+                    <div class="toggle">
+                        <div class="toggle-thumb"></div>
+                    </div>
                 </div>
 
                 <div class="setting toggle-container" id="clean-copy-toggle" x-wk-on="true">
-                    <label>Clean Copy (don't select <sup>[references]</sup>)</label>
+                    <label>Clean copy</label>
+                    <div class="setting-info">Don't copy <sup>[references]</sup></div>
+                    <div class="toggle">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <div class="setting toggle-container" id="sticky-tables-toggle" x-wk-on="true">
+                    <label>Sticky table headers</label>
+                    <div class="setting-info">Table header stays visible as you scroll</div>
                     <div class="toggle">
                         <div class="toggle-thumb"></div>
                     </div>
@@ -21,6 +42,7 @@
                 
                 <div class="setting toggle-container" id="scroll-button-toggle" x-wk-on="false">
                     <label>Scroll To Top button</label>
+                    <div class="setting-info">In the bottom-right corner</div>
                     <div class="toggle">
                         <div class="toggle-thumb"></div>
                     </div>

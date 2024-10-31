@@ -11,6 +11,11 @@ body {
 
 .page {
     padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #settings {
@@ -32,7 +37,6 @@ input {
     font: inherit;
     color: inherit;
     border-radius: 10px;
-    /* background: rgb(199, 220, 251); */
     background: rgb(220, 220, 220);
     border: 2px solid rgb(181, 181, 181);
     padding: 5px;
@@ -49,7 +53,8 @@ input {
     background: rgb(220, 220, 220);
 }
 
-.button:hover {
+.button:hover,
+.toggle:hover {
     border-color: black;
 }
 
@@ -97,4 +102,10 @@ a {
 
 #save-info {
     display: none;
+}
+
+.setting-info {
+    font-size: 0.8em;
+    color: grey;
+    font-style: italic;
 }
