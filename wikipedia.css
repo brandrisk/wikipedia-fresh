@@ -38,10 +38,13 @@
     padding: 5px;
     box-sizing: border-box;
     background-color: var(--background-color-base,#fff);
+    max-width: 99.75rem;
+    margin: auto;
 }
 
 .x-wk-sticky-row {
     position: sticky;
     top: 0;
     box-shadow: 0 0 1px grey;
+    z-index: 10;
 }
