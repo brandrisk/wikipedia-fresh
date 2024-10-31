@@ -9,6 +9,10 @@ body {
     color: black;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .page {
     padding: 10px;
     display: flex;
@@ -16,6 +20,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 #settings {
@@ -28,7 +33,8 @@ body {
     background: rgb(245, 245, 245);
     padding: 10px;
     border-radius: 10px;
-    width: fit-content;
+    width: 100%;
+    max-width: 500px;
 }
 
 input {
@@ -59,8 +65,8 @@ input {
 }
 
 .toggle {
-    width: 30px;
-    height: fit-content;
+    width: 50px;
+    height: 25px;
     border: 2px solid rgb(181, 181, 181);
     padding: 5px;
     border-radius: 10px;
@@ -72,8 +78,8 @@ input {
 .toggle-thumb {
     border-radius: 100%;
     background: black;
-    width: 50%;
-    aspect-ratio: 1/1;
+    width: 15px;
+    height: 15px;
 }
 
 .toggle-container[x-wk-on="true"] .toggle {
