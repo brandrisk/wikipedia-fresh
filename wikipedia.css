@@ -1,7 +1,3 @@
-/* body, .mw-body h1, .mw-body .mw-heading1, .mw-body-content h1, .mw-body-content .mw-heading1, .mw-body-content h2, .mw-body-content .mw-heading2 {
-
-} */
-
 #x-wk-stt-button {
     position: fixed;
     bottom: 10px;
@@ -13,10 +9,11 @@
     border-radius: 100%;
     opacity: 0.5;
     cursor: pointer;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     color: black;
+    box-shadow: 0 0 1px grey;
 }
 
 #x-wk-stt-button:hover {
@@ -30,4 +27,21 @@
     padding: 10px;
     justify-content: center;
     align-items: center;
+}
+
+#x-wk-clean-header {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: var(--background-color-base,#fff);
+}
+
+.x-wk-sticky-row {
+    position: sticky;
+    top: 0;
+    box-shadow: 0 0 1px grey;
 }
