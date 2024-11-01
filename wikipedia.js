@@ -8,23 +8,22 @@ browser.storage.local.get(['font', 'scrollButton', 'cleanCopy', 'justRead', 'sti
     if (res.scrollButton) {
         attachScrollButton();
     }
-    
-    
+
+
     // default true
-    
+
     if (res.cleanCopy != false) {
         cleanCopy();
     }
-    
+
     if (res.stickyTables != false) {
         stickyTables();
     }
-    
+
     if (res.justRead != false) {
         justRead();
     }
 });
-
 
 function cleanCopy() {
     attachStyle(`
@@ -143,14 +142,15 @@ function justRead() {
         }
 
         .wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td {
-            border: none;
+            border: 1px solid grey;
         }
 
         .wikitable {
             border-radius: 5px;
             overflow: hidden;
             border: none;
-            border-collapse: unset;
+            border-collapse: collapse;
+            border-style: hidden;
         }
 
         .cdx-button.cdx-button--fake-button cdx-button--size-large.cdx-button--fake-button--enabled {
@@ -238,15 +238,6 @@ function justRead() {
 }
 
 function stickyTables() {
-    attachStyle(`
-        thead {
-            position: sticky;
-            top: 0;
-            box-shadow: 0 0 1px grey;
-        }
-
-        `);
-
     const tables = document.querySelectorAll('.wikitable');
 
     for (let table of tables) {
@@ -254,14 +245,24 @@ function stickyTables() {
             continue;
         }
 
-        if (!table.querySelector('thead')) {
-            const tbody = table.querySelector('tbody');
-            const firstRow = tbody.querySelector('tr');
+        // for some reason thead is loaded late, after this function runs
+        const thead = table.querySelector('thead');
+        table.classList.add('x-wk-sticky-table');
 
-            if ([...firstRow.children].every(((child) => child.tagName == 'TH'))) {
-                firstRow.classList.add('x-wk-sticky-row');
-            }
-        }
+        // if (thead != null) {
+        //     thead.classList.add('x-wk-sticky-thead');
+        // } else {
+        //     try {
+        //         const tbody = table.querySelector('tbody');
+        //         const firstRow = tbody.querySelector('tr');
+
+        //         if ([...firstRow.children].every(((child) => child.tagName == 'TH'))) {
+        //             firstRow.classList.add('x-wk-sticky-row');
+        //         }
+        //     } catch(e) {
+
+        //     }
+        // }
     }
 }
 
