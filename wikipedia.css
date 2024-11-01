@@ -45,6 +45,11 @@
 .x-wk-sticky-row {
     position: sticky;
     top: 0;
-    box-shadow: 0 0 1px grey;
+    z-index: 10;
+}
+
+.x-wk-sticky-table thead {
+    position: sticky;
+    top: 0;
     z-index: 10;
 }
