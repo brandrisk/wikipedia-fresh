@@ -7,7 +7,6 @@ const justReadToggle = document.querySelector('#just-read-toggle');
 const stickyTablesToggle = document.querySelector('#sticky-tables-toggle');
 
 browser.storage.local.get(['cleanCopy', 'scrollButton', 'font', 'justRead', 'stickyTables']).then((res) => {
-    console.log(res)
     if (res.cleanCopy != undefined) {
         cleanCopyToggle.setAttribute('x-wk-on', res.cleanCopy);
     }
