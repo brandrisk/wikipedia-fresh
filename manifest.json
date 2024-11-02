@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Wikipedia Kit",
-    "description": "Make Wikipedia more usable with features such as clean copy, sticky table headers and simple UI.",
-    "version": "0.0.1",
+    "description": "A clean Wikipedia interface with better text selection, tables and search bar.",
+    "version": "0.0.2",
     "content_scripts": [
         {
             "matches": [
@@ -21,8 +21,7 @@
     ],
     "permissions": [
         "storage",
-        "tabs",
-        "activeTab"
+        "tabs"
     ],
     "web_accessible_resources": [
         "settings.html",
