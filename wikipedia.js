@@ -141,18 +141,6 @@ function justRead() {
             background-color: unset !important;
         }
 
-        .wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td {
-            border: 1px solid grey;
-        }
-
-        .wikitable {
-            border-radius: 5px;
-            overflow: hidden;
-            border: none;
-            border-collapse: collapse;
-            border-style: hidden;
-        }
-
         .cdx-button.cdx-button--fake-button cdx-button--size-large.cdx-button--fake-button--enabled {
             border: none;
             border-radius: 5px;
@@ -194,10 +182,6 @@ function justRead() {
             border-radius: 5px;
         }
 
-        table {
-            border-radius: 5px;
-        }
-
         .cdx-search-input__input-wrapper {
             box-shadow: 0 0 1px grey;
             border-radius: 5px;
@@ -217,7 +201,7 @@ function justRead() {
             display: none;
         }
 
-        table {
+        .wikitable {
             overflow: hidden;
         }
 
@@ -241,29 +225,37 @@ function stickyTables() {
     const tables = document.querySelectorAll('.wikitable');
 
     for (let table of tables) {
-        if (window.innerHeight > table.getBoundingClientRect().height) {
-            continue;
-        }
-
-        // for some reason thead is loaded late, after this function runs
-        const thead = table.querySelector('thead');
-        table.classList.add('x-wk-sticky-table');
-
-        // if (thead != null) {
-        //     thead.classList.add('x-wk-sticky-thead');
-        // } else {
-        //     try {
-        //         const tbody = table.querySelector('tbody');
-        //         const firstRow = tbody.querySelector('tr');
-
-        //         if ([...firstRow.children].every(((child) => child.tagName == 'TH'))) {
-        //             firstRow.classList.add('x-wk-sticky-row');
-        //         }
-        //     } catch(e) {
-
-        //     }
+        // if (window.innerHeight >= table.getBoundingClientRect().height) {
+        //     continue;
         // }
+
+        table.classList.add('x-wk-sticky-table');
     }
+
+    setTimeout(() => {
+        const ts = document.querySelectorAll('table:not(:has(thead)):has(tbody)');
+
+        for (let t of ts) {
+            // if (window.innerHeight >= t.getBoundingClientRect().height) {
+            //     continue;
+            // }
+
+            let n = 0;
+
+            const tbody = t.querySelector('tbody');
+
+            for (let row of tbody.children) {
+                if (row.children.length > 1 && [...row.children].every(((child) => child.tagName == 'TH'))) {
+                    row.classList.add('x-wk-sticky-row');
+                    row.style.top = `${n}px`;
+                    n += row.getBoundingClientRect().height;
+                } else {
+                    break;
+                }
+            }
+        }
+    }, 1000);
+
 }
 
 function addFont(font) {
