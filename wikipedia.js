@@ -25,6 +25,8 @@ browser.storage.local.get(['font', 'scrollButton', 'cleanCopy', 'justRead', 'sti
     }
 });
 
+attachTableButtons();
+
 function cleanCopy() {
     attachStyle(`
     sup.reference, sup.noprint, span.noprint {
@@ -274,4 +276,91 @@ function attachStyle(styleText) {
     const styleElement = document.createElement('style');
     styleElement.textContent = styleText.trim().replaceAll(/[\t\n]/g, '');
     document.body.append(styleElement);
+}
+
+
+function attachTableButtons() {
+    const tables = document.querySelectorAll('.wikitable');
+
+    let n = 0;
+
+    for (let table of tables) {
+        const container = document.createElement('div');
+        container.classList.add('x-wk-container');
+        container.setAttribute('x-wk-id', n);
+
+        const copyCsvButton = createTableButton('copy CSV');
+        const downloadCsvButton = createTableButton('download CSV');
+        
+        copyCsvButton.addEventListener('click', () => {
+            copyCsv(container.getAttribute('x-wk-id'));
+        });
+
+        downloadCsvButton.addEventListener('click', () => {
+            downloadCsv(container.getAttribute('x-wk-id'));
+        });
+        
+        container.append(copyCsvButton);
+        container.append(downloadCsvButton);
+
+        table.insertAdjacentElement('beforebegin', container);
+        n++;
+    }
+}
+
+function createTableButton(text) {
+    const button = document.createElement('div');
+    button.classList.add('x-wk-button');
+    button.textContent = text;
+    return button;
+}
+
+function getCsv(id) {
+    const btn = document.querySelector(`[x-wk-id="${id}"]`);
+    const table = btn.nextElementSibling;
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    const headrows = [...thead.children].filter((child) => child.tagName == 'TR');
+    const bodyrows = [...tbody.children].filter((child) => child.tagName == 'TR');
+
+    let elements = [];
+
+    if(headrows.length == 1) {
+        const cells = [...headrows[0].children].filter((child) => child.tagName == 'TH').map((cell) => {
+            const x = cell.textContent.trim().replaceAll('"', '');
+            return x.includes(',') ? `"${x}"` : x;
+        });
+        
+        elements.push(cells.join(','));
+        
+        for (let row of bodyrows) {
+            const c = [...row.children].filter((child) => child.tagName == 'TH' || child.tagName == 'TD').map((cell) => {
+                const x = cell.textContent.trim().replaceAll('"', '');
+                return x.includes(',') ? `"${x}"` : x;
+            });
+
+            elements.push(c.join(','));
+        }
+
+        const text = elements.join('\n');
+        return text;
+    }
+}
+
+
+function copyCsv(id) {
+    const text = getCsv(id);
+    navigator.clipboard.writeText(text);
+}
+
+function downloadCsv(id) {
+    const text = getCsv(id);
+    const f = new File([text], 'table.csv', {type: 'text/csv'});
+    const url = URL.createObjectURL(f);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.setAttribute('download', 'table.csv');
+    a.click();
+    a.remove();
 }
