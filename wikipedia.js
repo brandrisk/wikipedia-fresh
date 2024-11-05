@@ -327,7 +327,7 @@ function getCsv(id) {
 
     if(headrows.length == 1) {
         const cells = [...headrows[0].children].filter((child) => child.tagName == 'TH').map((cell) => {
-            const x = cell.textContent.trim().replaceAll('"', '');
+            const x = cell.textContent.replace(/["\n]+/ig, '').trim();
             return x.includes(',') ? `"${x}"` : x;
         });
         
@@ -335,7 +335,7 @@ function getCsv(id) {
         
         for (let row of bodyrows) {
             const c = [...row.children].filter((child) => child.tagName == 'TH' || child.tagName == 'TD').map((cell) => {
-                const x = cell.textContent.trim().replaceAll('"', '');
+                const x = cell.textContent.replace(/["\n]+/uig, '').trim();
                 return x.includes(',') ? `"${x}"` : x;
             });
 
